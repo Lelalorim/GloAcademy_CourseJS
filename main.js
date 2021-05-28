@@ -2,11 +2,23 @@
 
 let num = 266219;
 
-function persistence(num) {
-  numString = num.toString();
+// Перебор цифр из числа по порядку
+function multiplySum(arr) {
   let sum = 1;
-  for (var i = 0; i < numString.length; i++) {
-    sum = sum * numString[i];
+  let elem = String(arr); //перевод в строчный тип данных
+  //console.log(typeof (elem), elem);
+
+  for (let i = 0; i < elem.length; i++) {
+    sum *= Number(elem[i]); //умножение на следующий элемент. Number - перевод в числовой тип данных.
+    //console.log(elem[i]);
   }
-  console.log(sum);
-};
+  return (sum);
+}
+
+console.log(multiplySum(num));
+
+let stepen = multiplySum(num) ** 3;
+//console.log('stepen: ', stepen);
+
+console.log(String(stepen).substr(0, 2));
+//console.log(String(stepen).substring(0, 2));
