@@ -27,8 +27,7 @@ switch (lang) {
 
 lang === 'ru' ? console.log('c.: ' + kalendar[0]) : console.log('c.: ' + kalendar[1]);
 
-
-namePerson = prompt('Введите имя: ')
+namePerson = prompt('Введите имя: ');
 namePerson === 'Артем' ? console.log('директор') :
   namePerson === 'Максим' ? console.log('преподаватель') :
   console.log('студент');
