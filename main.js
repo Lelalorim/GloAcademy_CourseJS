@@ -8,9 +8,9 @@ let lang = prompt('Выберите язык: "en" или "ru"', 'ru'),
   namePerson;
 
 if (lang === 'ru') {
-  console.log('a.: Пн, Вт, Ср, Чт, Пт, Сб, Вс');
+  console.log(`a.: ${kalendar[0]}`);
 } else if (lang === 'en') {
-  console.log('a.: Sun, Mon, Tue, Wed, Thu, Fri, Sat');
+  console.log(`a.: ${kalendar[1]}`);
 } else {
   alert('Нужно ввести "en" или "ru"');
   console.log('Нужно ввести "en" или "ru"');
@@ -18,10 +18,10 @@ if (lang === 'ru') {
 
 switch (lang) {
   case 'ru':
-    console.log('b.: Пн, Вт, Ср, Чт, Пт, Сб, Вс');
+    console.log(`b.: ${kalendar[0]}`);
     break;
   case 'en':
-    console.log('b.: Sun, Mon, Tue, Wed, Thu, Fri, Sat');
+    console.log(`b.: ${kalendar[1]}`);
     break;
 }
 
