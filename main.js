@@ -30,4 +30,5 @@ lang === 'ru' ? console.log('c.: ' + kalendar[0]) : console.log('c.: ' + kalenda
 namePerson = prompt('Введите имя: ');
 namePerson === 'Артем' ? console.log('директор') :
   namePerson === 'Максим' ? console.log('преподаватель') :
+  namePerson === null || namePerson.trim() === '' ? console.error('Введите имя') :
   console.log('студент');
