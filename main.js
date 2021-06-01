@@ -5,7 +5,11 @@ let lang = prompt('Выберите язык: "en" или "ru"', 'ru'),
     ['Пн', ' Вт', ' Ср', ' Чт', ' Пт', ' Сб', ' Вс'],
     ['Sun', ' Mon', ' Tue', ' Wed', ' Thu', ' Fri', ' Sat']
   ],
+  kalendarMap = new Map(),
   namePerson;
+
+kalendarMap.set('en', kalendar[1]);
+kalendarMap.set('ru', kalendar[0]);
 
 if (lang === 'ru') {
   console.log(`a.: ${kalendar[0]}`);
@@ -25,7 +29,7 @@ switch (lang) {
     break;
 }
 
-lang === 'ru' ? console.log('c.: ' + kalendar[0]) : console.log('c.: ' + kalendar[1]);
+console.log('c.: ' + kalendarMap.get(`${lang}`));
 
 namePerson = prompt('Введите имя: ');
 namePerson === 'Артем' ? console.log('директор') :
