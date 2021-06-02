@@ -1,19 +1,19 @@
 'use strict';
 
-const arg = 0;
+const arg = prompt('Введите текст');
 
 function shortDescript(arg) {
-  arg = prompt('Введите текст');
-  if (typeof (arg) !== 'string') {
+  if (typeof (arg) !== 'string' || arg.trim().length == 0) {
     alert('Введите текст');
   } else {
     const trueString = arg.trim();
-    console.log(typeof (arg));
     console.log(`"строка: ${trueString}"`);
     if (trueString.length > 30) {
-      console.log(`${trueString.substring(0,30)}...`);
+      return (`${trueString.substring(0,30)}...`);
+    } else {
+      return arg;
     }
   }
 }
 
-shortDescript();
+console.log('shortDescript(): ', shortDescript(arg));
