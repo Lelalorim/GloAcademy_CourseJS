@@ -18,7 +18,12 @@ function shortDescript(stroka) {
     }
   }
 
-  while (typeof (stroka) !== 'string' || cutSpaces(stroka).length === 0) {
+  const isNumber = function (n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+
+  };
+
+  while (typeof (stroka) !== 'string' || cutSpaces(stroka).length === 0 || isNumber(stroka)) {
     stroka = prompt('введите строку', '');
   }
 
