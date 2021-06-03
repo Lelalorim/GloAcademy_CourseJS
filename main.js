@@ -2,7 +2,7 @@
 
 function shortDescript(stroka) {
 
-  function cutSpaces(arg) { //обрезка пробелов
+  function cutSpaces(arg) {
     if (arg === null) {
       return '';
     } else {
@@ -10,7 +10,7 @@ function shortDescript(stroka) {
     }
   }
 
-  function checkString(par) { //обрезка до 30 символов
+  function shortString(par) {
     if (cutSpaces(par).length < 30) {
       return cutSpaces(par);
     } else {
@@ -18,15 +18,11 @@ function shortDescript(stroka) {
     }
   }
 
-  while (typeof (stroka) !== 'string' || cutSpaces(stroka).length === 0) { //проверка на строку
+  while (typeof (stroka) !== 'string' || cutSpaces(stroka).length === 0) {
     stroka = prompt('введите строку', '');
-    //console.log(`Длина строки: ${stroka.length}`);
-    // console.log(stroka);
-    // console.log(`Строка без пробелов:${cutSpaces(stroka)}`);
   }
 
-  //shortDescript(stroka); //обрезанная строка с ... или короткая
-  return console.log('Краткое описание:', checkString(stroka));
+  return console.log('Краткое описание:', shortString(stroka));
 }
 
 shortDescript();
