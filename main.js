@@ -1,32 +1,12 @@
 'use strict';
 
-function shortDescript(stroka) {
+const arr = ['27', '43', '66', '275', '421', '524', '742'];
 
-  function cutSpaces(arg) {
-    if (arg === null) {
-      return '';
-    } else {
-      return arg.trim();
-    }
+console.log('Начальный массив:' + arr);
+
+for (let i = 0; i < arr.length; i++) {
+
+  if (arr[i].charAt(0) === '2' || arr[i].charAt(0) === '4') {
+    console.log(arr[i]);
   }
-
-  function shortString(par) {
-    if (cutSpaces(par).length < 30) {
-      return cutSpaces(par);
-    } else {
-      return (`${cutSpaces(par).substring(0, 30)}...`);
-    }
-  }
-
-  const isNumber = function (n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
-  };
-
-  while (typeof (stroka) !== 'string' || cutSpaces(stroka).length === 0 || isNumber(stroka)) {
-    stroka = prompt('введите строку', '');
-  }
-
-  return console.log('Краткое описание:', shortString(stroka));
 }
-
-shortDescript();
