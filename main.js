@@ -20,7 +20,6 @@ function shortDescript(stroka) {
 
   const isNumber = function (n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
-
   };
 
   while (typeof (stroka) !== 'string' || cutSpaces(stroka).length === 0 || isNumber(stroka)) {
