@@ -4,12 +4,6 @@ const isNumber = function (n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
-const income = 'Фриланс',
-  addExpenses = prompt('Перечислите возможные расходы через запятую', 'Интернет, Коммуналка, Мобильный'),
-  deposit = confirm('Есть ли у вас депозит в банке?'),
-  mission = 500000,
-  period = 9;
-
 let money;
 
 const start = function () {
@@ -21,6 +15,12 @@ const start = function () {
 
 start();
 
+const income = 'Фриланс',
+  addExpenses = prompt('Перечислите возможные расходы через запятую', 'Интернет, Коммуналка, Мобильный'),
+  deposit = confirm('Есть ли у вас депозит в банке?'),
+  mission = 500000,
+  period = 9;
+
 const showTypeof = function (data) {
   console.log(data, typeof (data));
 };
@@ -29,20 +29,20 @@ showTypeof(money);
 showTypeof(income);
 showTypeof(deposit);
 
-let expenses = [];
-
 console.log(addExpenses.toLocaleLowerCase().split(', '));
+
+let expenses = [];
 
 const getExpensesMonth = function () {
   let sum = 0,
     tarif = 0;
 
-  for (let i = 0; i < addExpenses.split(', ').length; i++) {
+  for (let i = 0; i < 2; i++) {
     expenses[i] = prompt('Введите обязательную статью расходов?',
       addExpenses.toLocaleLowerCase().split(', ')[i]);
 
     do {
-      tarif = prompt(`Сколько вы тратите на оплату ${expenses[i]}?`);
+      tarif = prompt(`Сколько вы тратите на оплату ${expenses[i]}?`, 1200);
     }
     while (!isNumber(tarif));
 
@@ -57,13 +57,13 @@ const expensesAmount = getExpensesMonth();
 
 console.log(`На обязательные платежи вы тратите ${expensesAmount}.`);
 
-function getAccumulatedMonth(a, b) {
+const getAccumulatedMonth = function (a, b) {
   return a - b;
-}
+};
 
-function gettargetMonth(a, b) {
+const gettargetMonth = function (a, b) {
   return Math.ceil(a / b);
-}
+};
 
 const accumulatedMonth = getAccumulatedMonth(money, expensesAmount),
   budgetDay = Math.floor(accumulatedMonth / 30);
