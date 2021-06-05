@@ -8,9 +8,9 @@ let money;
 
 const start = function () {
   do {
-    money = prompt('Укажите ваш месячный доход');
+    money = +prompt('Укажите ваш месячный доход');
   }
-  while (!isNumber(money));
+  while (!isNumber(money) || money === 0);
 };
 
 start();
@@ -42,11 +42,11 @@ const getExpensesMonth = function () {
       addExpenses.toLocaleLowerCase().split(', ')[i]);
 
     do {
-      tarif = prompt(`Сколько вы тратите на оплату ${expenses[i]}?`, 1200);
+      tarif = +prompt(`Сколько вы тратите на оплату ${expenses[i]}?`, 1200);
     }
-    while (!isNumber(tarif));
+    while ((!isNumber(tarif) || tarif === 0));
 
-    sum += +tarif;
+    sum += tarif;
   }
 
   console.log(expenses);
