@@ -57,21 +57,21 @@ const expensesAmount = getExpensesMonth();
 
 console.log(`На обязательные платежи вы тратите ${expensesAmount}.`);
 
-const getAccumulatedMonth = function (a, b) {
-  return a - b;
+const getAccumulatedMonth = function (arg1, arg2) {
+  return arg1 - arg2;
 };
 
-const gettargetMonth = function (a, b) {
-  return Math.ceil(a / b);
+const getTargetMonth = function (par1, par2) {
+  return Math.ceil(par1 / par2);
 };
 
 const accumulatedMonth = getAccumulatedMonth(money, expensesAmount),
   budgetDay = Math.floor(accumulatedMonth / 30);
 
-if (gettargetMonth(mission, accumulatedMonth) < 0) {
+if (getTargetMonth(mission, accumulatedMonth) < 0) {
   console.log('Цель не будет достигнута');
 } else {
-  console.log(`Вы достигните цели через ${gettargetMonth(mission, accumulatedMonth)} месяцев(-а).`);
+  console.log(`Вы достигните цели через ${getTargetMonth(mission, accumulatedMonth)} месяцев(-а).`);
 }
 
 console.log(`Бюджет на день ${budgetDay}.`);
