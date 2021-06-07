@@ -1,39 +1,43 @@
 'use strict';
 
-console.log('Задача №1');
+const isNumber = function (n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  },
+  gameOver = function () {
+    alert('Игра окончена.');
+  },
+  gameWin = function () {
+    alert('Поздравляю, Вы угадали!!!');
+  };
 
-const arr = ['27', '43', '66', '275', '421', '524', '742'];
+function letsPlay() {
 
-console.log('Начальный массив:' + arr);
+  const getRandomNumber = Math.floor(Math.random() * 100) + 1;
 
-for (let i = 0; i < arr.length; i++) {
-
-  if (arr[i].charAt(0) === '2' || arr[i].charAt(0) === '4') {
-    console.log(arr[i]);
-  }
-}
-
-console.log(`        
-Задача №2
-`);
-
-const start = prompt('Введите число начало диапазона', 0),
-  end = prompt('Введите конечное число диапозона', 100);
-
-function primeNumber(num) {
-  if (num > 1) {
-    return true;
-  }
-
-  for (let i = 2; i < num; i++) {
-    if (num % i === 0) {
-      return false;
+  function getAnswer(ans) {
+    ans = +prompt('Введи число от 1 до 100.');
+    console.log(ans);
+    if (!isNumber(ans) || ans > 100) {
+      return getAnswer();
     }
+
+    function checkAnswer() {
+      if (ans === getRandomNumber) {
+        gameWin();
+      } else if (ans === 0) {
+        gameOver();
+      } else if (ans < getRandomNumber) {
+        alert('Загаданное число больше');
+        getAnswer();
+      } else {
+        alert('Загаданное число меньше');
+        getAnswer();
+      }
+    }
+    return checkAnswer();
   }
+
+  confirm('Угадай число от 1 до 100.') ? getAnswer() : gameOver();
 }
 
-for (let i = start; i <= end; i++) {
-  if (primeNumber(i)) {
-    console.log(`Число ${i} - простое и его делители 1 и ${i}`);
-  }
-}
+letsPlay();
