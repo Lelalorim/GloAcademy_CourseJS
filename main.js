@@ -20,6 +20,7 @@ function letsPlay() {
         letsPlay() :
         gameOver();
     },
+    countMax = count + 1,
     getRandomNumber = Math.floor(Math.random() * 100) + 1;
 
   function getAnswer(ans) {
@@ -27,7 +28,7 @@ function letsPlay() {
       return letAnotherGame();
     }
     ans = +prompt('Введи число от 1 до 100.');
-    console.log(`Попытка ${11-count}: ${ans}`);
+    console.log(`Попытка ${countMax-count}: ${ans}`);
     if (!isNumber(ans) || ans > 100) {
       return getAnswer();
     }
@@ -39,10 +40,10 @@ function letsPlay() {
       } else if (ans === 0) {
         gameOver();
       } else if (ans < getRandomNumber) {
-        alert('Загаданное число больше, осталось попыток ' + count);
+        alert(`Загаданное число больше, осталось попыток ${count}.`);
         getAnswer();
       } else {
-        alert('Загаданное число меньше, осталось попыток ' + count);
+        alert(`Загаданное число меньше, осталось попыток ${count}.`);
         getAnswer();
       }
     }
