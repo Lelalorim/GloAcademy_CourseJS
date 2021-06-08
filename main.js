@@ -1,40 +1,54 @@
 'use strict';
 
-const isNumber = function (n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
-  },
-  gameOver = function () {
-    alert('Игра окончена.');
-  },
-  gameWin = function () {
-    alert('Поздравляю, Вы угадали!!!');
-  };
-
 function letsPlay() {
 
-  const getRandomNumber = Math.floor(Math.random() * 100) + 1;
+  let count = 10;
+  const isNumber = function (n) {
+      return !isNaN(parseFloat(n)) && isFinite(n);
+    },
+    gameOver = function () {
+      alert('Игра окончена.');
+    },
+    letAnotherGame = function () {
+      confirm('Попытки закончились, хотите сыграть еще?') ?
+        letsPlay() :
+        gameOver();
+    },
+    gameWin = function () {
+      confirm(`Поздравляю, Вы угадали!!! Осталось попыток ${count}
+      Хотели бы сыграть еще?`) ?
+        letsPlay() :
+        gameOver();
+    },
+    getRandomNumber = Math.floor(Math.random() * 100) + 1;
 
   function getAnswer(ans) {
+    if (count === 0) {
+      return letAnotherGame();
+    }
     ans = +prompt('Введи число от 1 до 100.');
-    console.log(ans);
+    console.log(`Попытка ${count}: ${ans}`);
     if (!isNumber(ans) || ans > 100) {
       return getAnswer();
     }
 
-    function checkAnswer() {
+    function checkAnswer(count) {
+
       if (ans === getRandomNumber) {
         gameWin();
       } else if (ans === 0) {
         gameOver();
       } else if (ans < getRandomNumber) {
-        alert('Загаданное число больше');
+        alert('Загаданное число больше, осталось попыток ' + count);
         getAnswer();
       } else {
-        alert('Загаданное число меньше');
+        alert('Загаданное число меньше, осталось попыток ' + count);
         getAnswer();
       }
     }
-    return checkAnswer();
+
+    count--;
+    return checkAnswer(count);
   }
 
   confirm('Угадай число от 1 до 100.') ? getAnswer() : gameOver();
