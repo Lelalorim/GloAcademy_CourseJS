@@ -27,7 +27,7 @@ function letsPlay() {
       return letAnotherGame();
     }
     ans = +prompt('Введи число от 1 до 100.');
-    console.log(`Попытка ${count}: ${ans}`);
+    console.log(`Попытка ${11-count}: ${ans}`);
     if (!isNumber(ans) || ans > 100) {
       return getAnswer();
     }
