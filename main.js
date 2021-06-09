@@ -1,17 +1,13 @@
 'use strict';
 
-console.log('Задача №1');
-
 const arr = ['27', '43', '66', '275', '421', '524', '742'];
+const filteredArr = arr.filter(function (elem) {
+  return (elem.startsWith('2') || elem.startsWith('4'));
+});
 
+console.log('Задача №1');
 console.log('Начальный массив:' + arr);
-
-for (let i = 0; i < arr.length; i++) {
-
-  if (arr[i].charAt(0) === '2' || arr[i].charAt(0) === '4') {
-    console.log(arr[i]);
-  }
-}
+console.log('filteredArr: ', filteredArr);
 
 console.log(`        
 Задача №2
@@ -21,14 +17,15 @@ const start = prompt('Введите число начало диапазона'
   end = prompt('Введите конечное число диапозона', 100);
 
 function primeNumber(num) {
-  if (num > 1) {
-    return true;
-  }
 
   for (let i = 2; i < num; i++) {
     if (num % i === 0) {
       return false;
     }
+  }
+
+  if (num > 1) {
+    return true;
   }
 }
 
