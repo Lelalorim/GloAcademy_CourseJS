@@ -1,36 +1,18 @@
 'use strict';
 
-const arr = ['27', '43', '66', '275', '421', '524', '742'];
-const filteredArr = arr.filter(function (elem) {
-  return (elem.startsWith('2') || elem.startsWith('4'));
-});
+const week = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
 
-console.log('Задача №1');
-console.log('Начальный массив:' + arr);
-console.log('filteredArr: ', filteredArr);
+const date = new Date(),
+  dateNow = date.toLocaleString('ru', {
+    weekday: 'long'
+  });
 
-console.log(`        
-Задача №2
-`);
-
-const start = prompt('Введите число начало диапазона', 0),
-  end = prompt('Введите конечное число диапозона', 100);
-
-function primeNumber(num) {
-
-  for (let i = 2; i < num; i++) {
-    if (num % i === 0) {
-      return false;
-    }
-  }
-
-  if (num > 1) {
-    return true;
-  }
-}
-
-for (let i = start; i <= end; i++) {
-  if (primeNumber(i)) {
-    console.log(`Число ${i} - простое и его делители 1 и ${i}`);
+for (let i = 0; i < week.length; i++) {
+  if (week[i].toLowerCase() === dateNow) {
+    console.log("%c" + week[i], "font-weight: 900;");
+  } else if (week[i] === 'Суббота' || week[i] === 'Воскресенье') {
+    console.log("%c" + week[i], "font-style: italic;color: indigo;");
+  } else {
+    console.log(week[i]);
   }
 }
