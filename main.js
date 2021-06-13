@@ -7,12 +7,17 @@ const date = new Date(),
     weekday: 'long'
   });
 
-for (let i = 0; i < week.length; i++) {
-  if (week[i].toLowerCase() === dateNow) {
-    console.log("%c" + week[i], "font-weight: 900;");
-  } else if (week[i] === 'Суббота' || week[i] === 'Воскресенье') {
-    console.log("%c" + week[i], "font-style: italic;color: indigo;");
-  } else {
-    console.log(week[i]);
+week.forEach(elem => {
+  let html = elem;
+  if (elem.toLowerCase() === dateNow) {
+    html = html.bold();
   }
-}
+
+  if (elem.toLowerCase() === 'суббота' || elem.toLowerCase() === 'воскресенье') {
+    html = html.italics();
+  }
+
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  document.body.appendChild(div);
+});
