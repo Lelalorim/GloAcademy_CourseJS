@@ -1,23 +1,41 @@
 'use strict';
 
-const week = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
+const span1 = document.querySelector('#task1');
+const span2 = document.querySelector('#task2');
 
-const date = new Date(),
-  dateNow = date.toLocaleString('ru', {
-    weekday: 'long'
-  });
+const dateNowTask2 = setInterval(function () {
 
-week.forEach(elem => {
-  let html = elem;
-  if (elem.toLowerCase() === dateNow) {
-    html = html.bold();
+  const date = new Date();
+  const year = date.getFullYear(),
+    month = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth(),
+    day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate(),
+    hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours(),
+    minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(),
+    seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+
+  span2.textContent = `${day}.${month}.${year} - ${hour}:${minutes}:${seconds}`;
+}, 1000);
+
+dateNowTask2();
+
+const dateNowTask1 = setInterval(function () {
+
+  let date = new Date();
+
+  const formattedDate = () => {
+
+    year = date.getFullYear() + ' года';
+    month = month.slice(0, month.length - 1) + 'я';
+    dayWeek = dayWeek[0].toUpperCase() + dayWeek.slice(1);
+    day = date.getDate();
+    hour = hour;
+    minutes = minutes;
+    seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
   }
 
-  if (elem.toLowerCase() === 'суббота' || elem.toLowerCase() === 'воскресенье') {
-    html = html.italics();
-  }
+  span1.textContent = `Сегодня ${dayWeek}, ${day} ${month} ${year}, ${hour} ${minutes} ${seconds}`;
 
-  const div = document.createElement('div');
-  div.innerHTML = html;
-  document.body.appendChild(div);
-});
+}, 1000);
+
+
+dateNowTask1(); //Сегодня Вторник, 4 февраля 2020 года, 21 час 5 минут 33 секунды
