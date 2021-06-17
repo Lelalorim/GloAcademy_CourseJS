@@ -1,53 +1,29 @@
 'use strict';
 
-const span1 = document.querySelector('#task1');
-const span2 = document.querySelector('#task2');
+const chaptersCollection = document.querySelectorAll('ul'),
+  book = document.querySelectorAll('.book'),
+  banner = document.querySelector('.adv'),
+  imgBackground = document.body;
 
-const dateNowTask2 = setInterval(function () {
+banner.remove();
 
-  const date = new Date();
-  const year = date.getFullYear(),
-    month = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth(),
-    day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate(),
-    hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours(),
-    minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes(),
-    seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+book[0].before(book[1]);
+book[5].after(book[2]);
+book[4].after(book[3]);
 
-  span2.textContent = `${day}.${month}.${year} - ${hour}:${minutes}:${seconds}`;
-}, 1000);
+imgBackground.style.backgroundImage = 'url(./image/you-dont-know-js.jpg)';
 
-const dateNowTask1 = setInterval(function () {
+chaptersCollection[0].children[3].after(chaptersCollection[0].children[6]);
+chaptersCollection[0].children[5].before(chaptersCollection[0].children[8]);
+chaptersCollection[0].children[10].before(chaptersCollection[0].children[2]);
 
-  let date = new Date();
-  let year = date.getFullYear(),
-    month = date.toLocaleString('ru', {
-      month: 'long'
-    }),
-    dayWeek = date.toLocaleString('ru', {
-      weekday: 'long'
-    }),
-    day = date.getDate().toString(),
-    hour = date.getHours().toString(),
-    minutes = date.getMinutes().toString(),
-    seconds = date.getSeconds().toString();
+chaptersCollection[4].children[4].innerText = 'Книга 3. this и Прототипы Объектов';
 
-  const formattedDate = () => {
+chaptersCollection[5].children[3].before(chaptersCollection[5].children[9]);
+chaptersCollection[5].children[5].after(chaptersCollection[5].children[2]);
+chaptersCollection[5].children[8].after(chaptersCollection[5].children[6]);
 
-    year += ' года';
-    month = month.slice(0, month.length - 1) + 'я';
-    dayWeek = dayWeek[0].toUpperCase() + dayWeek.slice(1);
-    day = day;
-    hour = hour === '1' ? hour + ' час' :
-      hour > 1 && hour < 5 ? hour + ' часа' : hour + ' часов';
-    minutes = minutes > 10 && minutes < 15 ? minutes + ' минут' : minutes.slice(-1) === '1' ? minutes + ' минута' : minutes.slice(-1) > 1 && minutes.slice(-1) < 5 ? minutes + ' минуты' : minutes + ' минут';
-    seconds = seconds.slice(-1) === '1' ? seconds + ' секунда' : seconds.slice(-1) > 1 && seconds.slice(-1) < 5 ? seconds + ' секунды' : seconds + ' секунд';
-
-    span1.textContent = `Сегодня ${dayWeek}, ${day} ${month} ${year}, ${hour} ${minutes} ${seconds}`;
-  };
-  formattedDate();
-
-
-}, 1000);
-
-
-//dateNowTask1(); //Сегодня Вторник, 4 февраля 2020 года, 21 час 5 минут 33 секунды
+const newChapter = chaptersCollection[2].children[8].cloneNode(true);
+newChapter.textContent = 'Глава 8: За пределами ES6';
+chaptersCollection[2].append(newChapter);
+chaptersCollection[2].children[8].after(chaptersCollection[2].children[10]);
