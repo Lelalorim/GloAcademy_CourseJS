@@ -5,7 +5,8 @@ const todoControl = document.querySelector('.todo-control'),
   todoList = document.querySelector('.todo-list'),
   todoCompleted = document.querySelector('.todo-completed');
 
-let todoData = JSON.parse(localStorage.data) || [];
+const todoData = (!localStorage.getItem('data')) ? [] :
+  JSON.parse(localStorage.getItem('data'));
 
 const render = function () {
   todoList.textContent = '';
@@ -36,12 +37,12 @@ const render = function () {
     const btnTodoRemove = li.querySelector('.todo-remove');
     btnTodoRemove.addEventListener('click', function () {
       todoData.splice(todoData.indexOf(item), [1]);
-      localStorage.data = JSON.stringify(todoData);
       render();
     });
+
   });
 
-  localStorage.data = JSON.stringify(todoData);
+  localStorage.setItem('data', JSON.stringify(todoData));
 };
 
 todoControl.addEventListener('submit', function (event) {
