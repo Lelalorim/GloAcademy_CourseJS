@@ -29,6 +29,33 @@ const isString = function (perem) {
   return isNumber(perem) || perem === null || perem.trim().length === 0;
 };
 
+const clearInputValue = function (arr) {
+  arr.children[0].value = '';
+  arr.children[1].value = '';
+};
+
+const checkInput = function (element) {
+  let strInput = function (element) {
+    element = document.querySelectorAll('input[placeholder="Наименование"]');
+    element.forEach(item => {
+      item.addEventListener('input', () => {
+        item.value = item.value.replace(/[^а-я]/gi, '');
+      });
+    });
+  };
+
+  let numInput = function (element) {
+    element = document.querySelectorAll('input[placeholder="Сумма"]');
+    element.forEach(item => {
+      item.addEventListener('input', () => {
+        item.value = item.value.replace(/[^\d]/g, '');
+      });
+    });
+  };
+  strInput();
+  numInput();
+};
+
 let money;
 
 const appData = {
@@ -71,19 +98,23 @@ const appData = {
   },
   addExpensesBlock: function () {
     let cloneExpensesItem = expensesItems[0].cloneNode(true);
+    clearInputValue(cloneExpensesItem);
     expensesItems[0].parentNode.insertBefore(cloneExpensesItem, addExpenses);
     expensesItems = document.querySelectorAll('.expenses-items');
     if (expensesItems.length === 3) {
       addExpenses.style.display = 'none';
     }
+    checkInput();
   },
   addIncomeBlock: function () {
     let cloneIncomeItem = incomeItems[0].cloneNode(true);
+    clearInputValue(cloneIncomeItem);
     incomeItems[0].parentNode.insertBefore(cloneIncomeItem, addIncome);
     incomeItems = document.querySelectorAll('.income-items');
     if (incomeItems.length === 3) {
       addIncome.style.display = 'none';
     }
+    checkInput();
   },
   getExpenses: function () {
     expensesItems.forEach(function (item) {
@@ -168,6 +199,7 @@ const appData = {
 };
 
 btnCalc.disabled = 'true';
+checkInput();
 
 salaryAmount.addEventListener('input', function () {
 
