@@ -30,8 +30,7 @@ const isString = function (perem) {
 };
 
 const clearInputValue = function (arr) {
-  arr.children[0].value = '';
-  arr.children[1].value = '';
+  arr.querySelectorAll('input').forEach(item => item.value = '');
 };
 
 const checkInput = function (element) {
