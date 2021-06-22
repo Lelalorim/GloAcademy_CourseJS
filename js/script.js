@@ -34,12 +34,12 @@ const clearInputValue = function (arr) {
   arr.children[1].value = '';
 };
 
-const checkInput = function (element) {
+const setValidateInput = function () {
   let strInput = function (element) {
     element = document.querySelectorAll('input[placeholder="Наименование"]');
     element.forEach(item => {
       item.addEventListener('input', () => {
-        item.value = item.value.replace(/[^\s,а-яА-Я]/g, '');
+        item.value = item.value.replace(/[^\s,а-я]/gi, '');
       });
     });
   };
@@ -48,7 +48,7 @@ const checkInput = function (element) {
     element = document.querySelectorAll('input[placeholder="Сумма"]');
     element.forEach(item => {
       item.addEventListener('input', () => {
-        item.value = item.value.replace(/[^\d]/g, '');
+        item.value = item.value.replace(/[\D]/g, '');
       });
     });
   };
@@ -104,7 +104,7 @@ const appData = {
     if (expensesItems.length === 3) {
       addExpenses.style.display = 'none';
     }
-    checkInput();
+    setValidateInput();
   },
   addIncomeBlock: function () {
     let cloneIncomeItem = incomeItems[0].cloneNode(true);
@@ -114,7 +114,7 @@ const appData = {
     if (incomeItems.length === 3) {
       addIncome.style.display = 'none';
     }
-    checkInput();
+    setValidateInput();
   },
   getExpenses: function () {
     expensesItems.forEach(function (item) {
@@ -199,7 +199,7 @@ const appData = {
 };
 
 btnCalc.disabled = 'true';
-checkInput();
+setValidateInput();
 
 salaryAmount.addEventListener('input', function () {
 
