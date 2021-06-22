@@ -39,7 +39,7 @@ const checkInput = function (element) {
     element = document.querySelectorAll('input[placeholder="Наименование"]');
     element.forEach(item => {
       item.addEventListener('input', () => {
-        item.value = item.value.replace(/[^а-я]/gi, '');
+        item.value = item.value.replace(/[^\s,а-яА-Я]/g, '');
       });
     });
   };
