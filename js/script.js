@@ -204,11 +204,13 @@ salaryAmount.addEventListener('input', function () {
 
   if (salaryAmount.value !== '') {
     btnCalc.disabled = false;
-    btnCalc.addEventListener('click', appData.start);
   } else {
     btnCalc.disabled = 'true';
   }
+
 });
+
+btnCalc.addEventListener('click', appData.start.bind(appData));
 
 addExpenses.addEventListener('click', appData.addExpensesBlock);
 addIncome.addEventListener('click', appData.addIncomeBlock);
