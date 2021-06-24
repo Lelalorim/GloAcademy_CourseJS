@@ -72,28 +72,31 @@ const appData = {
   expensesMonth: 0,
   start: function () {
 
-    appData.budget = +salaryAmount.value;
+    this.budget = +salaryAmount.value;
 
-    appData.getExpenses();
-    appData.getIncome();
-    appData.getExpensesMonth();
-    //appData.getInfoDeposit();
-    appData.getAddExpenses();
-    appData.getBudget();
-    appData.getAddIncome();
+    this.getExpenses();
+    this.getIncome();
+    this.getExpensesMonth();
+    //this.getInfoDeposit();
+    this.getAddExpenses();
+    this.getBudget();
+    this.getAddIncome();
 
-    appData.showResult();
+    this.showResult();
 
   },
   showResult: function () {
-    resultBudgetMonth.value = appData.budgetMonth;
-    budgetDayValue.value = appData.budgetDay;
-    expensesMonth.value = appData.expensesMonth;
-    addExpensesValue.value = appData.addExpenses.join(', ');
-    addIncomeValue.value = appData.addIncome.join(', ');
-    targetMonth.value = appData.getTargetMonth();
-    incomePeriod.value = appData.calcPeriod();
-    periodRange.addEventListener('input', appData.showResult);
+    resultBudgetMonth.value = this.budgetMonth;
+    budgetDayValue.value = this.budgetDay;
+    expensesMonth.value = this.expensesMonth;
+    addExpensesValue.value = this.addExpenses.join(', ');
+    addIncomeValue.value = this.addIncome.join(', ');
+    targetMonth.value = this.getTargetMonth();
+    incomePeriod.value = this.calcPeriod();
+    periodRange.addEventListener('input', this.showResult.bind(appData), {
+      once: true
+    });
+    console.log(this);
   },
   addExpensesBlock: function () {
     let cloneExpensesItem = expensesItems[0].cloneNode(true);
@@ -144,7 +147,7 @@ const appData = {
       if (item !== '') {
         this.addExpenses.push(item);
       }
-    });
+    }, this);
   },
   getAddIncome: function () {
     addIncomeItem.forEach(function (item) {
@@ -152,7 +155,7 @@ const appData = {
       if (item.value !== '') {
         this.addIncome.push(itemValue);
       }
-    });
+    }, this);
   },
   getExpensesMonth: function () {
     for (let key in this.expenses) {
@@ -212,8 +215,8 @@ salaryAmount.addEventListener('input', function () {
 
 btnCalc.addEventListener('click', appData.start.bind(appData));
 
-addExpenses.addEventListener('click', appData.addExpensesBlock);
-addIncome.addEventListener('click', appData.addIncomeBlock);
+addExpenses.addEventListener('click', appData.addExpensesBlock.bind(appData));
+addIncome.addEventListener('click', appData.addIncomeBlock.bind(appData));
 periodRange.addEventListener('input', function () {
   periodRangeValue.textContent = periodRange.value;
 });
