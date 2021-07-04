@@ -24,14 +24,14 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 
 		const idInterval = setInterval(() => {
+			const addZero = digit => {
+				return digit < 10 ? '0' + digit : digit;
+			};
 			const timer = (getTimeRemaining());
 
-			timerHours.textContent = timer.hours < 0 ? '00' : timer.hours < 10 ? '0' +
-				timer.hours : timer.hours;
-			timerMinutes.textContent = timer.minutes < 0 ? '00' : timer.minutes < 10 ? '0' +
-				timer.minutes : timer.minutes;
-			timerSeconds.textContent = timer.seconds < 0 ? '00' : timer.seconds < 10 ? '0' +
-				timer.second : timer.seconds;
+			timerHours.textContent = timer.hours < 0 ? '00' : addZero(timer.hours);
+			timerMinutes.textContent = timer.minutes < 0 ? '00' : addZero(timer.minutes);
+			timerSeconds.textContent = timer.seconds < 0 ? '00' : addZero(timer.seconds);
 
 			if (timer.timeRemaining < 0) {
 				clearInterval(idInterval);
@@ -41,6 +41,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	}
 
-	countTimer('03 july 2021');
+	countTimer('05 july 2021 12:00');
 
 });

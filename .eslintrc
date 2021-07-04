@@ -60,7 +60,8 @@
       }
     ],
     "eol-last": [
-      "error"
+      "error",
+      "never"
     ],
     "func-call-spacing": [
       "error",
