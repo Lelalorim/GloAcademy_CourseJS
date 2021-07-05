@@ -1,7 +1,7 @@
 'use strict';
 
 const deadline = '01 January 2022',
-	date = new Date(),
+	date = new Date('05 july 21 00:01:05'),
 	targetDate = new Date(deadline).getTime(),
 	hour = date.getHours(),
 	currentWeekDay = date.toLocaleString('ru', {
@@ -18,7 +18,7 @@ const deadline = '01 January 2022',
 		'Доброй ночи'
 	];
 
-const addZero = digit => digit < 10 ? `0${digit}` : digit;
+const addZero = digit => digit < 1 ? '12' : digit < 10 ? `0${digit}` : digit;
 
 function declension(number, word) {
 	const cases = [2, 0, 1, 1, 1, 2];
