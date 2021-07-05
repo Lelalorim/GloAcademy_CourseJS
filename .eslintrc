@@ -212,12 +212,12 @@
     "arrow-spacing": [
       "error"
     ],
-    "no-confusing-arrow": [
-      "error",
-      {
-        "allowParens": true
-      }
-    ],
+    // "no-confusing-arrow": [
+    //   "error",
+    //   {
+    //     "allowParens": true
+    //   }
+    // ],
     "no-useless-computed-key": [
       "error"
     ],

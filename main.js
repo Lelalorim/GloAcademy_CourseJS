@@ -7,7 +7,9 @@ const deadline = '01 January 2022',
 	currentWeekDay = date.toLocaleString('ru', {
 		weekday: 'long'
 	}),
-	currentTime = date.toLocaleTimeString('en'),
+	currentTime = date.toLocaleTimeString('ru', {
+		hour12: true
+	}),
 	daysRemaning = Math.floor((targetDate - date.getTime()) / 1000 / 60 / 60 / 24),
 	timesOfDay = [
 		'Доброе утро',
@@ -16,6 +18,7 @@ const deadline = '01 January 2022',
 		'Доброй ночи'
 	];
 
+const addZero = digit => digit < 10 ? `0${digit}` : digit;
 
 function declension(number, word) {
 	const cases = [2, 0, 1, 1, 1, 2];
@@ -44,5 +47,5 @@ const span = document.querySelectorAll('span');
 
 span[0].textContent = getTimesOfDay(hour);
 span[1].textContent = `Сегодня: ${toUpperCaseFirstChar(currentWeekDay)}`;
-span[2].textContent = `Текущее время ${currentTime}`;
+span[2].textContent = `Текущее время ${addZero(currentTime[0]) + currentTime.substring(1)}`;
 span[3].textContent = `До нового года осталось ${daysRemaning} ${declension(daysRemaning, ['день', 'дня', 'дней'])}`;
