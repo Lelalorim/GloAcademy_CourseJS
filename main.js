@@ -1,7 +1,7 @@
 'use strict';
 
 const deadline = '01 January 2022',
-	date = new Date('05 july 21 00:01:05'),
+	date = new Date(),
 	targetDate = new Date(deadline).getTime(),
 	hour = date.getHours(),
 	currentWeekDay = date.toLocaleString('ru', {
