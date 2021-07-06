@@ -42,7 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		}, 1000);
 	}
 
-	countTimer('15 july 2021 14:27');
+	countTimer('16 August 2021 07:00');
 
 	// Menu
 	const toogleMenu = () => {
@@ -101,7 +101,6 @@ window.addEventListener('DOMContentLoaded', () => {
 						return;
 					}
 					stepLeft -= 5;
-					console.log('stepLeft: ', stepLeft);
 					popupBlock.style.left = stepLeft + "%";
 					requestAnimationFrame(popupClose);
 				};
@@ -116,5 +115,8 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
 
 	togglePopup();
+
+	// Scroll to element onclick() menuItem
+
 
 });
