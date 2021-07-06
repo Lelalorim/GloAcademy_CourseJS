@@ -71,7 +71,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		popupBtn.forEach(elem => elem.addEventListener('click', () => {
 			popup.style.display = 'block';
 
-			if (screen.width > 768) {
+			if (document.documentElement.clientWidth >= 768) {
 				let stepLeft = -60;
 				const popupBlock = document.querySelector('.popup-content');
 
@@ -90,7 +90,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		popupClose.addEventListener('click', () => {
 
-			if (screen.width > 768) {
+			if (document.documentElement.clientWidth >= 768) {
 				let stepLeft = 40;
 				const popupBlock = document.querySelector('.popup-content');
 
