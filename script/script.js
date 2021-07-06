@@ -72,16 +72,16 @@ window.addEventListener('DOMContentLoaded', () => {
 			popup.style.display = 'block';
 
 			if (screen.width > 768) {
-				let stepLeft = -110;
+				let stepLeft = -60;
 				const popupBlock = document.querySelector('.popup-content');
 
-				function popupOpen() {
-					if (stepLeft < 38) {
+				const popupOpen = () => {
+					if (stepLeft < 40) {
 						stepLeft += 5;
 						popupBlock.style.left = stepLeft + "%";
 						requestAnimationFrame(popupOpen);
 					}
-				}
+				};
 				requestAnimationFrame(popupOpen);
 			}
 
@@ -89,11 +89,29 @@ window.addEventListener('DOMContentLoaded', () => {
 		}));
 
 		popupClose.addEventListener('click', () => {
-			popup.style.display = 'none';
+
+			if (screen.width > 768) {
+				let stepLeft = 40;
+				const popupBlock = document.querySelector('.popup-content');
+
+				const popupClose = () => {
+					if (stepLeft === -60) {
+						popup.style.display = 'none';
+						cancelAnimationFrame(popupClose);
+						return;
+					}
+					stepLeft -= 5;
+					console.log('stepLeft: ', stepLeft);
+					popupBlock.style.left = stepLeft + "%";
+					requestAnimationFrame(popupClose);
+				};
+				requestAnimationFrame(popupClose);
+			} else {
+				popup.style.display = 'none';
+
+			}
+
 		});
-
-		// popupOpen();
-
 
 	};
 
