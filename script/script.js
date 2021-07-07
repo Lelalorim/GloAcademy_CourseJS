@@ -89,15 +89,16 @@ window.addEventListener('DOMContentLoaded', () => {
 		}));
 
 		popupClose.addEventListener('click', () => {
+			const popupBlock = document.querySelector('.popup-content');
 
 			if (document.documentElement.clientWidth >= 768) {
 				let stepLeft = 40;
-				const popupBlock = document.querySelector('.popup-content');
 
 				const popupClose = () => {
 					if (stepLeft === -60) {
 						popup.style.display = 'none';
 						cancelAnimationFrame(popupClose);
+						popupBlock.style.left = '';
 						return;
 					}
 					stepLeft -= 5;
@@ -109,7 +110,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				popup.style.display = 'none';
 
 			}
-
+			popupBlock.style.left = '';
 		});
 
 	};
