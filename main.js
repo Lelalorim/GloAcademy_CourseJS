@@ -4,20 +4,13 @@ const colorTitle = document.querySelector('#color'),
   bodyStyle = document.querySelector('body'),
   btnChange = document.querySelector('#change');
 
-function getRandomColor() {
-  (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
-}
-
-const randomColor = `#${getRandomColor()}`
-
-function changeStyle(color) {
+function changeStyle() {
+  const color = `#${(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')}`;
   colorTitle.textContent = color;
-  console.log('randomColor: ', color);
-  bodyStyle.style.cssText = `background-color: ${color};`;
   btnChange.style.color = color;
+  bodyStyle.style.cssText = `background-color: ${color};`;
 }
 
-//randomColor;
+changeStyle();
 
-btnChange.addEventListener('click', changeStyle(randomColor))
-bodyStyle.style.cssText = `background-color: ${randomColor};`;
+btnChange.addEventListener('click', changeStyle);
