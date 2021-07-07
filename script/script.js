@@ -118,6 +118,20 @@ window.addEventListener('DOMContentLoaded', () => {
 	togglePopup();
 
 	// Scroll to element onclick() menuItem
+	const smoothScrollElems = document.querySelectorAll('a[href^="#"]:not(a[href="#"]):not(a[href="#close"])');
+	console.log('smoothScrollElems: ', smoothScrollElems);
+
+	smoothScrollElems.forEach(link => {
+		link.addEventListener('click', event => {
+			event.preventDefault();
+
+			const id = link.getAttribute('href').substring(1);
+
+			document.getElementById(id).scrollIntoView({
+				behavior: 'smooth',
+			});
+		});
+	});
 
 
 });
