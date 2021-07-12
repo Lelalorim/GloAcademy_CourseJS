@@ -1,8 +1,9 @@
-'use strict';
-
-const addZero = digit => digit < 10 ? `0${digit}` : digit;
-
+/* eslint-disable no-confusing-arrow */
+/* eslint-disable strict */
 window.addEventListener('DOMContentLoaded', () => {
+	'use strict';
+
+	const addZero = digit => digit < 10 ? `0${digit}` : digit;
 
 	// Timer
 	function countTimer(deadline) {
@@ -45,7 +46,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	countTimer('16 August 2021 07:00');
 
 	// Menu
-	const toogleMenu = () => {
+	const toggleMenu = () => {
 
 		const btnMenu = document.querySelector('.menu'),
 			menu = document.querySelector('menu'),
@@ -60,7 +61,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	};
 
-	toogleMenu();
+	toggleMenu();
 
 	// popup
 	const togglePopup = () => {
@@ -113,6 +114,22 @@ window.addEventListener('DOMContentLoaded', () => {
 			popupBlock.style.left = '';
 		});
 
+		popup.addEventListener('click', event => {
+			let target = event.target;
+
+			if (target.classList.contains('popup-close')) {
+				popup.style.display = 'none';
+			} else {
+
+				target = target.closest('.popup-content');
+
+				if (!target) {
+					popup.style.display = 'none';
+				}
+			}
+
+		});
+
 	};
 
 	togglePopup();
@@ -133,5 +150,38 @@ window.addEventListener('DOMContentLoaded', () => {
 		});
 	});
 
+	// Tabs
+	const tabs = () => {
+		const tabHeader = document.querySelector('.service-header'),
+			tab = document.querySelectorAll('.service-header-tab'),
+			tabContent = document.querySelectorAll('.service-tab');
+
+		const toggleTabContent = index => {
+			for (let i = 0; i < tabContent.length; i++) {
+				if (index === i) {
+					tab[i].classList.add('active');
+					tabContent[i].classList.remove('d-none');
+				} else {
+					tab[i].classList.remove('active');
+					tabContent[i].classList.add('d-none');
+				}
+			}
+		};
+
+		tabHeader.addEventListener('click', event => {
+			let target = event.target;
+			target = target.closest('.service-header-tab');
+
+			if (target) {
+				tab.forEach((item, i) => {
+					if (item === target) {
+						toggleTabContent(i);
+					}
+				});
+			}
+		});
+	};
+
+	tabs();
 
 });
