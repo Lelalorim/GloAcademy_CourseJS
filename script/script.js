@@ -45,21 +45,44 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	countTimer('16 August 2021 07:00');
 
+
+
 	// Menu
 	const toggleMenu = () => {
 
 		const btnMenu = document.querySelector('.menu'),
 			menu = document.querySelector('menu'),
-			closeBtn = document.querySelector('.close-btn'),
-			menuItems = menu.querySelectorAll('ul>li');
+			closeBtn = document.querySelector('.close-btn');
 
 		const handlerMenu = () => menu.classList.toggle('active-menu');
 
+		const smoothScroll = event => {
+			console.log('event: ', event);
+			event.preventDefault();
+			const target = event.target.closest('a');
+
+			const id = target.getAttribute('href').substring(1);
+
+			document.getElementById(id).scrollIntoView({
+				behavior: 'smooth',
+			});
+
+		};
+
 		btnMenu.addEventListener('click', handlerMenu);
 		closeBtn.addEventListener('click', handlerMenu);
-		menuItems.forEach(elem => elem.addEventListener('click', handlerMenu));
+		document.addEventListener('click', event => {
+			let target = event.target;
+			target = target.closest('a');
+			console.log('target: ', target);
+			if (target === document.querySelector('a[href="#service=block"]')) {
+				smoothScroll(event);
+			}
+		});
 
 	};
+
+
 
 	toggleMenu();
 
@@ -133,22 +156,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
 
 	togglePopup();
-
-	// Scroll to element onclick() menuItem
-	const smoothScrollElems = document.querySelectorAll('a[href^="#"]:not(a[href="#"]):not(a[href="#close"])');
-	console.log('smoothScrollElems: ', smoothScrollElems);
-
-	smoothScrollElems.forEach(link => {
-		link.addEventListener('click', event => {
-			event.preventDefault();
-
-			const id = link.getAttribute('href').substring(1);
-
-			document.getElementById(id).scrollIntoView({
-				behavior: 'smooth',
-			});
-		});
-	});
 
 	// Tabs
 	const tabs = () => {
