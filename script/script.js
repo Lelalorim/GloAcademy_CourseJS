@@ -101,32 +101,28 @@ window.addEventListener('DOMContentLoaded', () => {
 			popupClose = document.querySelector('.popup-close'),
 			popupBtn = document.querySelectorAll('.popup-btn');
 
-		popupBtn.forEach(elem => elem.addEventListener('click', () => {
+		const popupAnimateOpen = () => {
+			const popupBlock = document.querySelector('.popup-content');
 			popup.style.display = 'block';
-
 			if (document.documentElement.clientWidth >= 768) {
+				const step = 5;
 				let stepLeft = -60;
-				const popupBlock = document.querySelector('.popup-content');
 
 				const popupOpen = () => {
 					if (stepLeft < 40) {
-						stepLeft += 5;
+						stepLeft += step;
 						popupBlock.style.left = stepLeft + "%";
 						requestAnimationFrame(popupOpen);
 					}
 				};
 				requestAnimationFrame(popupOpen);
 			}
-
-
-		}));
-
-		popupClose.addEventListener('click', () => {
+		};
+		const popupAnimateClose = () => {
 			const popupBlock = document.querySelector('.popup-content');
-
 			if (document.documentElement.clientWidth >= 768) {
 				let stepLeft = 40;
-
+				const step = -5;
 				const popupClose = () => {
 					if (stepLeft === -60) {
 						popup.style.display = 'none';
@@ -134,7 +130,7 @@ window.addEventListener('DOMContentLoaded', () => {
 						popupBlock.style.left = '';
 						return;
 					}
-					stepLeft -= 5;
+					stepLeft += step;
 					popupBlock.style.left = stepLeft + "%";
 					requestAnimationFrame(popupClose);
 				};
@@ -144,19 +140,24 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			}
 			popupBlock.style.left = '';
-		});
+		};
+
+
+		popupBtn.forEach(elem => elem.addEventListener('click', popupAnimateOpen));
+
+		popupClose.addEventListener('click', popupAnimateClose);
 
 		popup.addEventListener('click', event => {
 			let target = event.target;
 
 			if (target.classList.contains('popup-close')) {
-				popup.style.display = 'none';
+				popupAnimateClose();
 			} else {
 
 				target = target.closest('.popup-content');
 
 				if (!target) {
-					popup.style.display = 'none';
+					popupAnimateClose();
 				}
 			}
 
