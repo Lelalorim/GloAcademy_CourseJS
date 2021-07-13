@@ -1,194 +1,203 @@
 /* eslint-disable no-confusing-arrow */
 /* eslint-disable strict */
 window.addEventListener('DOMContentLoaded', () => {
-			'use strict';
+	'use strict';
 
-			const addZero = digit => digit < 10 ? `0${digit}` : digit;
+	const addZero = digit => digit < 10 ? `0${digit}` : digit;
 
-			// Timer
-			function countTimer(deadline) {
-				const timerHours = document.querySelector('#timer-hours'),
-					timerMinutes = document.querySelector('#timer-minutes'),
-					timerSeconds = document.querySelector('#timer-seconds');
+	// Timer
+	function countTimer(deadline) {
+		const timerHours = document.querySelector('#timer-hours'),
+			timerMinutes = document.querySelector('#timer-minutes'),
+			timerSeconds = document.querySelector('#timer-seconds');
 
-				function getTimeRemaining() {
+		function getTimeRemaining() {
 
-					const dateStop = new Date(deadline).getTime(),
-						dateNow = new Date().getTime(),
-						timeRemaining = (dateStop - dateNow) / 1000,
-						seconds = Math.floor(timeRemaining % 60),
-						minutes = Math.floor((timeRemaining / 60) % 60),
-						hours = Math.floor(timeRemaining / 60 / 60);
+			const dateStop = new Date(deadline).getTime(),
+				dateNow = new Date().getTime(),
+				timeRemaining = (dateStop - dateNow) / 1000,
+				seconds = Math.floor(timeRemaining % 60),
+				minutes = Math.floor((timeRemaining / 60) % 60),
+				hours = Math.floor(timeRemaining / 60 / 60);
 
-					return {
-						timeRemaining,
-						hours,
-						minutes,
-						seconds
-					};
-				}
+			return {
+				timeRemaining,
+				hours,
+				minutes,
+				seconds
+			};
+		}
 
-				const idInterval = setInterval(() => {
+		const idInterval = setInterval(() => {
 
-					const timer = (getTimeRemaining());
+			const timer = (getTimeRemaining());
 
-					timerHours.textContent = timer.hours < 0 ? '00' : addZero(timer.hours);
-					timerMinutes.textContent = timer.minutes < 0 ? '00' : addZero(timer.minutes);
-					timerSeconds.textContent = timer.seconds < 0 ? '00' : addZero(timer.seconds);
+			timerHours.textContent = timer.hours < 0 ? '00' : addZero(timer.hours);
+			timerMinutes.textContent = timer.minutes < 0 ? '00' : addZero(timer.minutes);
+			timerSeconds.textContent = timer.seconds < 0 ? '00' : addZero(timer.seconds);
 
-					if (timer.timeRemaining < 0) {
-						clearInterval(idInterval);
-					}
-
-				}, 1000);
+			if (timer.timeRemaining < 0) {
+				clearInterval(idInterval);
 			}
 
-			countTimer('16 August 2021 07:00');
+		}, 1000);
+	}
+
+	countTimer('16 August 2021 07:00');
 
 
 
-			// Menu
-			const toggleMenu = () => {
+	// Menu
+	const toggleMenu = () => {
 
-				const btnMenu = document.querySelector('.menu'),
-					menu = document.querySelector('menu'),
-					mainAnchor = document.querySelector('main>a'),
-					closeBtn = document.querySelector('.close-btn');
+		const menu = document.querySelector('menu'),
+			mainBtn = document.querySelector('main>a');
 
-				const handlerMenu = () => menu.classList.toggle('active-menu');
+		const handlerMenu = () => menu.classList.toggle('active-menu');
 
-				const smoothScroll = event => {
-					console.log('event: ', event);
-					event.preventDefault();
-					const target = event.target.closest('a');
+		const smoothScroll = target => {
 
-					const id = target.getAttribute('href').substring(1);
+			event.preventDefault();
+			const id = target.getAttribute('href').substring(1);
 
-					document.getElementById(id).scrollIntoView({
-						behavior: 'smooth',
-					});
+			document.getElementById(id).scrollIntoView({
+				behavior: 'smooth',
+			});
 
+		};
+
+		document.addEventListener('click', event => {
+			let target = event.target;
+
+			if (!event.target.closest('menu')) {
+				menu.classList.remove('active-menu');
+			}
+
+			if (target.closest('a') === mainBtn) {
+				smoothScroll(target.closest('a'));
+			} else if (event.target.classList.contains('close-btn')) {
+				event.preventDefault();
+				handlerMenu();
+			} else if (event.target.closest('a')) {
+				target = event.target.closest('a');
+				smoothScroll(target);
+				handlerMenu();
+			}
+
+			if (event.target.closest('div')) {
+				if (event.target.closest('div').classList.contains('menu')) {
+					handlerMenu();
+				}
+			}
+		});
+
+	};
+
+	toggleMenu();
+
+	// popup
+	const togglePopup = () => {
+		const popup = document.querySelector('.popup'),
+			popupClose = document.querySelector('.popup-close'),
+			popupBtn = document.querySelectorAll('.popup-btn');
+
+		popupBtn.forEach(elem => elem.addEventListener('click', () => {
+			popup.style.display = 'block';
+
+			if (document.documentElement.clientWidth >= 768) {
+				let stepLeft = -60;
+				const popupBlock = document.querySelector('.popup-content');
+
+				const popupOpen = () => {
+					if (stepLeft < 40) {
+						stepLeft += 5;
+						popupBlock.style.left = stepLeft + "%";
+						requestAnimationFrame(popupOpen);
+					}
 				};
-
-				btnMenu.addEventListener('click', handlerMenu);
-				closeBtn.addEventListener('click', handlerMenu);
-				document.addEventListener('click', event => {
-						let target = event.target;
-						//if(target.closest)
-						if (target.closest('a') === mainAnchor) {
-							smoothScroll(event);
-						}
-						if (target.closest('li') {});
-
-					};
+				requestAnimationFrame(popupOpen);
+			}
 
 
+		}));
 
-					toggleMenu();
+		popupClose.addEventListener('click', () => {
+			const popupBlock = document.querySelector('.popup-content');
 
-					// popup
-					const togglePopup = () => {
-						const popup = document.querySelector('.popup'),
-							popupClose = document.querySelector('.popup-close'),
-							popupBtn = document.querySelectorAll('.popup-btn');
+			if (document.documentElement.clientWidth >= 768) {
+				let stepLeft = 40;
 
-						popupBtn.forEach(elem => elem.addEventListener('click', () => {
-							popup.style.display = 'block';
+				const popupClose = () => {
+					if (stepLeft === -60) {
+						popup.style.display = 'none';
+						cancelAnimationFrame(popupClose);
+						popupBlock.style.left = '';
+						return;
+					}
+					stepLeft -= 5;
+					popupBlock.style.left = stepLeft + "%";
+					requestAnimationFrame(popupClose);
+				};
+				requestAnimationFrame(popupClose);
+			} else {
+				popup.style.display = 'none';
 
-							if (document.documentElement.clientWidth >= 768) {
-								let stepLeft = -60;
-								const popupBlock = document.querySelector('.popup-content');
+			}
+			popupBlock.style.left = '';
+		});
 
-								const popupOpen = () => {
-									if (stepLeft < 40) {
-										stepLeft += 5;
-										popupBlock.style.left = stepLeft + "%";
-										requestAnimationFrame(popupOpen);
-									}
-								};
-								requestAnimationFrame(popupOpen);
-							}
+		popup.addEventListener('click', event => {
+			let target = event.target;
 
+			if (target.classList.contains('popup-close')) {
+				popup.style.display = 'none';
+			} else {
 
-						}));
+				target = target.closest('.popup-content');
 
-						popupClose.addEventListener('click', () => {
-							const popupBlock = document.querySelector('.popup-content');
+				if (!target) {
+					popup.style.display = 'none';
+				}
+			}
 
-							if (document.documentElement.clientWidth >= 768) {
-								let stepLeft = 40;
+		});
 
-								const popupClose = () => {
-									if (stepLeft === -60) {
-										popup.style.display = 'none';
-										cancelAnimationFrame(popupClose);
-										popupBlock.style.left = '';
-										return;
-									}
-									stepLeft -= 5;
-									popupBlock.style.left = stepLeft + "%";
-									requestAnimationFrame(popupClose);
-								};
-								requestAnimationFrame(popupClose);
-							} else {
-								popup.style.display = 'none';
+	};
 
-							}
-							popupBlock.style.left = '';
-						});
+	togglePopup();
 
-						popup.addEventListener('click', event => {
-							let target = event.target;
+	// Tabs
+	const tabs = () => {
+		const tabHeader = document.querySelector('.service-header'),
+			tab = document.querySelectorAll('.service-header-tab'),
+			tabContent = document.querySelectorAll('.service-tab');
 
-							if (target.classList.contains('popup-close')) {
-								popup.style.display = 'none';
-							} else {
+		const toggleTabContent = index => {
+			for (let i = 0; i < tabContent.length; i++) {
+				if (index === i) {
+					tab[i].classList.add('active');
+					tabContent[i].classList.remove('d-none');
+				} else {
+					tab[i].classList.remove('active');
+					tabContent[i].classList.add('d-none');
+				}
+			}
+		};
 
-								target = target.closest('.popup-content');
+		tabHeader.addEventListener('click', event => {
+			let target = event.target;
+			target = target.closest('.service-header-tab');
 
-								if (!target) {
-									popup.style.display = 'none';
-								}
-							}
-
-						});
-
-					};
-
-					togglePopup();
-
-					// Tabs
-					const tabs = () => {
-						const tabHeader = document.querySelector('.service-header'),
-							tab = document.querySelectorAll('.service-header-tab'),
-							tabContent = document.querySelectorAll('.service-tab');
-
-						const toggleTabContent = index => {
-							for (let i = 0; i < tabContent.length; i++) {
-								if (index === i) {
-									tab[i].classList.add('active');
-									tabContent[i].classList.remove('d-none');
-								} else {
-									tab[i].classList.remove('active');
-									tabContent[i].classList.add('d-none');
-								}
-							}
-						};
-
-						tabHeader.addEventListener('click', event => {
-							let target = event.target;
-							target = target.closest('.service-header-tab');
-
-							if (target) {
-								tab.forEach((item, i) => {
-									if (item === target) {
-										toggleTabContent(i);
-									}
-								});
-							}
-						});
-					};
-
-					tabs();
-
+			if (target) {
+				tab.forEach((item, i) => {
+					if (item === target) {
+						toggleTabContent(i);
+					}
 				});
+			}
+		});
+	};
+
+	tabs();
+
+});
