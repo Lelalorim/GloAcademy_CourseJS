@@ -45,7 +45,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	countTimer('16 August 2021 07:00');
 
+	const smoothScroll = target => {
 
+		event.preventDefault();
+		const id = target.getAttribute('href').substring(1);
+
+		document.getElementById(id).scrollIntoView({
+			behavior: 'smooth',
+		});
+
+	};
 
 	// Menu
 	const toggleMenu = () => {
@@ -54,17 +63,6 @@ window.addEventListener('DOMContentLoaded', () => {
 			mainBtn = document.querySelector('main>a');
 
 		const handlerMenu = () => menu.classList.toggle('active-menu');
-
-		const smoothScroll = target => {
-
-			event.preventDefault();
-			const id = target.getAttribute('href').substring(1);
-
-			document.getElementById(id).scrollIntoView({
-				behavior: 'smooth',
-			});
-
-		};
 
 		document.addEventListener('click', event => {
 			let target = event.target;
