@@ -100,8 +100,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	// popup
 	const togglePopup = () => {
 		const popup = document.querySelector('.popup'),
-			popupClose = document.querySelector('.popup-close'),
-			popupBtn = document.querySelectorAll('.popup-btn');
+			popupClose = document.querySelector('.popup-close');
 
 		const popupAnimateOpen = () => {
 			const popupBlock = document.querySelector('.popup-content');
@@ -144,7 +143,10 @@ window.addEventListener('DOMContentLoaded', () => {
 			popupBlock.style.left = '';
 		};
 
-		popupBtn.forEach(elem => elem.addEventListener('click', popupAnimateOpen));
+		document.addEventListener('click', event => {
+			if (!event.target.matches('.popup-btn')) return;
+			popupAnimateOpen();
+		});
 
 		popupClose.addEventListener('click', popupAnimateClose);
 
@@ -236,7 +238,6 @@ window.addEventListener('DOMContentLoaded', () => {
 			prevSlide(dots, currentSlide, 'dot-active');
 			currentSlide++;
 			if (currentSlide >= slides.length) currentSlide = 0;
-			console.log(currentSlide);
 			nextSlide(slides, currentSlide, 'portfolio-item-active');
 			nextSlide(dots, currentSlide, 'dot-active');
 		};
@@ -254,9 +255,8 @@ window.addEventListener('DOMContentLoaded', () => {
 			event.preventDefault();
 
 			const target = event.target;
-			console.log('slider');
+
 			if (!target.matches('.dot, .portfolio-btn')) {
-				console.log('прерываем переключение');
 				return;
 			}
 
