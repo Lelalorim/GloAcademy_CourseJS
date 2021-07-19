@@ -367,6 +367,26 @@ window.addEventListener('DOMContentLoaded', () => {
 			calcCount = document.querySelector('.calc-count'),
 			totalValue = document.getElementById('total');
 
+		function animateTotal(num) {
+			const time = 1000,
+				step = price * calcCount.value;
+			let n = 0;
+			const t = Math.round(time / num / step);
+			const interval = setInterval(() => {
+				n += step;
+				if (n === num) {
+					clearInterval(interval);
+				}
+				if (n > num) {
+					clearInterval(interval);
+					return;
+				}
+
+				totalValue.textContent = n;
+			}, t);
+
+		}
+
 		const countSum = () => {
 			let total = 0,
 				countValue = 1,
@@ -386,10 +406,10 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 
 			if (typeValue && squareValue) {
-				total = price * typeValue * squareValue * countValue * dayValue;
+				total = price * typeValue * squareValue * dayValue * countValue;
+				animateTotal(total);
 			}
 
-			totalValue.textContent = total;
 		};
 
 		calcBlock.addEventListener('change', event => {
@@ -402,6 +422,6 @@ window.addEventListener('DOMContentLoaded', () => {
 		});
 	};
 
-	calc(1000);
+	calc(100);
 
 });
