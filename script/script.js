@@ -370,7 +370,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			let n = 0;
 
 			const interval = setInterval(() => {
-				n += price;
+				n += Math.ceil(num / price);
 
 				if (n >= num) {
 					clearInterval(interval);
