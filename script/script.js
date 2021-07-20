@@ -366,22 +366,18 @@ window.addEventListener('DOMContentLoaded', () => {
 			totalValue = document.getElementById('total');
 
 		function animateTotal(num) {
-			const time = 1000,
-				step = price * calcCount.value;
+
 			let n = 0;
-			const t = Math.round(time / num / step);
+
 			const interval = setInterval(() => {
-				n += step;
-				if (n === num) {
+				n += price;
+
+				if (n >= num) {
 					clearInterval(interval);
-				}
-				if (n > num) {
-					clearInterval(interval);
-					return;
 				}
 
 				totalValue.textContent = n;
-			}, t);
+			}, 1);
 
 		}
 
