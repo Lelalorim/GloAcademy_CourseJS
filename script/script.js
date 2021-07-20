@@ -300,17 +300,15 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	//OurTeam block
 	const ourTeamBlock = document.getElementById('command');
-	let oldSrcImg = '';
 
 	ourTeamBlock.addEventListener('mouseover', event => {
 		if (event.target.matches('img')) {
-			oldSrcImg = event.target.src;
-			event.target.src = event.target.dataset.img;
+			[event.target.dataset.img, event.target.src] = [event.target.src, event.target.dataset.img];
 		}
 	});
 	ourTeamBlock.addEventListener('mouseout', event => {
 		if (event.target.matches('img')) {
-			event.target.src = oldSrcImg;
+			[event.target.src, event.target.dataset.img] = [event.target.dataset.img, event.target.src];
 		}
 	});
 
@@ -341,11 +339,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		if (target.matches('input')) {
 
-			target.value = target.value.trim();
-			target.value = target.value.replace(/^-*/g, '');
-			target.value = target.value.replace(/-*$/g, '');
-			target.value = target.value.replace(/-+/g, '-');
-			target.value = target.value.replace(/\s+/g, ' ');
+			target.value = target.value.trim()
+				.replace(/^-*/g, '')
+				.replace(/-*$/g, '')
+				.replace(/-+/g, '-')
+				.replace(/\s+/g, ' ');
 
 			if (nameInput.test(target.placeholder) & (target.value.length > 0)) {
 				let text = target.value.split(' ');
