@@ -407,7 +407,51 @@
 			</div>
 		</div>
 	</div>
+	<script src="./plugins/validator/validator.js"></script>
 
+	<script>
+		const form1 = new Validator({
+			selector: '#form1',
+			pattern: {
+				name: /[А-Яа-яёЁ]/,
+			},
+			method: {
+				'form1-name': [
+					['pattern', 'name'],
+				],
+			},
+		});
+		const form2 = new Validator({
+			selector: '#form2',
+			pattern: {
+				name: /[А-Яа-яёЁ]+/,
+				mess: /[А-Яа-яёЁ\s\.]+/,
+			},
+			method: {
+				'form2-name': [
+					['pattern', 'name'],
+				],
+				'form2-message': [
+					['pattern', 'mess'],
+				],
+			},
+		});
+		const form3 = new Validator({
+			selector: '#form3',
+			pattern: {
+				name: /[А-Яа-яёЁ]/,
+			},
+			method: {
+				'form3-name': [
+					['pattern', 'name'],
+				],
+			},
+		});
+
+		form1.init();
+		form2.init();
+		form3.init();
+	</script>
 	<script src="./script/script.js"></script>
 </body>
 
