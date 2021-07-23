@@ -82,6 +82,12 @@ window.addEventListener('DOMContentLoaded', () => {
 				handlerMenu();
 			} else if (event.target.closest('a')) {
 				target = event.target.closest('a');
+
+				if (target.getAttribute('href').substring(1) === '') {
+					event.preventDefault();
+					return;
+				}
+
 				smoothScroll(target);
 				handlerMenu();
 			}
