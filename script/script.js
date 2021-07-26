@@ -322,11 +322,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		if (target.matches('.calc-block>input')) target.value = target.value.replace(/\D/g, '');
 
-		if (phoneNumber.test(target.placeholder)) target.value = target.value.replace(/[^\d-()]/g, '');
+		if (phoneNumber.test(target.placeholder)) target.value = target.value.replace(/[^\d\+]/g, '');
 
-		if (target.matches('.mess')) target.value = target.value.replace(/[^\-\sа-я]/gi, '');
+		if (target.matches('.mess')) target.value = target.value.replace(/[^\.:,\!\?\-\s\dа-яё]/gi, '');
 
-		if (nameInput.test(target.placeholder)) target.value = target.value.replace(/[^\-\sа-я]/gi, '');
+		if (nameInput.test(target.placeholder)) target.value = target.value.replace(/[^\sа-яё]/gi, '');
 
 		if (mailInput.test(target.placeholder)) {
 			target.value = target.value.replace(/[^\w@\-.!~*']/gi, '');
