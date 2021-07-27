@@ -421,12 +421,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	//send-ajax-form
 
-	const sendForm = idForm => {
-		const errorMessage = 'Xто то пошло не так...',
+	const sendForm = () => {
+		const errorMessage = 'Что то пошло не так...',
 			loadMessage = 'Загрузка...',
 			successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
-
-		const form = document.getElementById(idForm);
 
 		const statusMessage = document.createElement('div');
 		statusMessage.style.cssText = `
@@ -434,17 +432,18 @@ window.addEventListener('DOMContentLoaded', () => {
 		color: aquamarine;
 		`;
 
-		form.addEventListener('submit', event => {
+		document.addEventListener('submit', event => {
+			const target = event.target;
 			event.preventDefault();
-			form.appendChild(statusMessage);
+			target.appendChild(statusMessage);
 			statusMessage.textContent = loadMessage;
-			const formData = new FormData(form);
+			const formData = new FormData(target);
 			const body = {};
 
 			formData.forEach((val, key) => {
 				body[key] = val;
 			});
-			form.reset();
+			target.reset();
 
 			postData(body,
 				() => {
@@ -476,7 +475,5 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	};
 
-	sendForm('form1');
-	sendForm('form2');
-	sendForm('form3');
+	sendForm();
 });
