@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable no-confusing-arrow */
 /* eslint-disable strict */
 window.addEventListener('DOMContentLoaded', () => {
@@ -418,7 +419,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	calc(100);
 
-
 	//send-ajax-form
 
 	const sendForm = () => {
@@ -445,33 +445,35 @@ window.addEventListener('DOMContentLoaded', () => {
 			});
 			target.reset();
 
-			postData(body,
-				() => {
+			const postData = body => new Promise((resolve, reject) => {
+
+				const request = new XMLHttpRequest();
+				request.addEventListener('readystatechange', () => {
+					if (request.readyState !== 4) {
+						return;
+					}
+					if (request.status === 200) {
+						resolve();
+					} else {
+						reject(request.status);
+					}
+
+				});
+
+				request.open('POST', './server.php');
+				request.setRequestHeader('Content-Type', 'application/json');
+				request.send(JSON.stringify(body));
+			});
+
+			postData(body)
+				.then(() => {
 					statusMessage.textContent = successMessage;
-				},
-				error => {
+				})
+				.catch(error => {
 					statusMessage.textContent = errorMessage;
 					console.error(error);
 				});
 		});
-
-		const postData = (body, outputData, errorData) => {
-			const request = new XMLHttpRequest();
-			request.addEventListener('readystatechange', () => {
-				if (request.readyState !== 4) {
-					return;
-				}
-				if (request.status === 200) {
-					outputData();
-				} else {
-					errorData(request.status);
-				}
-			});
-
-			request.open('POST', './server.php');
-			request.setRequestHeader('Content-Type', 'application/json');
-			request.send(JSON.stringify(body));
-		};
 
 	};
 
