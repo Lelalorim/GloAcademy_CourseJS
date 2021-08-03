@@ -51,6 +51,8 @@ window.addEventListener('DOMContentLoaded', () => {
 		event.preventDefault();
 		const id = target.getAttribute('href').substring(1);
 
+		if (!id.length) return;
+
 		document.getElementById(id).scrollIntoView({
 			behavior: 'smooth',
 		});
@@ -66,6 +68,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		const handlerMenu = () => menu.classList.toggle('active-menu');
 
 		document.addEventListener('click', event => {
+
 			let target = event.target;
 
 			if (target.matches('.portfolio-btn, .dot')) {
@@ -83,6 +86,12 @@ window.addEventListener('DOMContentLoaded', () => {
 				handlerMenu();
 			} else if (event.target.closest('a')) {
 				target = event.target.closest('a');
+
+				if (target.getAttribute('href') === '#') {
+					event.preventDefault();
+					return;
+				}
+				
 				smoothScroll(target);
 				handlerMenu();
 			}
