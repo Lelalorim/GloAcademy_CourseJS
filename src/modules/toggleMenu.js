@@ -1,60 +1,48 @@
-const smoothScroll = target => {
+import smoothScroll from './smoothScroll';
 
-		event.preventDefault();
-		const id = target.getAttribute('href').substring(1);
+const toggleMenu = () => {
 
-		if (!id.length) return;
+	const menu = document.querySelector('menu'),
+		mainBtn = document.querySelector('main>a');
 
-		document.getElementById(id).scrollIntoView({
-			behavior: 'smooth',
-		});
+	const handlerMenu = () => menu.classList.toggle('active-menu');
 
-	};
+	document.addEventListener('click', event => {
 
-	// Menu
-	const toggleMenu = () => {
+		let target = event.target;
 
-		const menu = document.querySelector('menu'),
-			mainBtn = document.querySelector('main>a');
+		if (target.matches('.portfolio-btn, .dot')) {
+			return;
+		}
 
-		const handlerMenu = () => menu.classList.toggle('active-menu');
+		if (!event.target.closest('menu')) {
+			menu.classList.remove('active-menu');
+		}
 
-		document.addEventListener('click', event => {
+		if (target.closest('a') === mainBtn) {
+			smoothScroll(target.closest('a'));
+		} else if (event.target.classList.contains('close-btn')) {
+			event.preventDefault();
+			handlerMenu();
+		} else if (event.target.closest('a')) {
+			target = event.target.closest('a');
 
-			let target = event.target;
-
-			if (target.matches('.portfolio-btn, .dot')) {
+			if (target.getAttribute('href') === '#') {
+				event.preventDefault();
 				return;
 			}
 
-			if (!event.target.closest('menu')) {
-				menu.classList.remove('active-menu');
-			}
+			smoothScroll(target);
+			handlerMenu();
+		}
 
-			if (target.closest('a') === mainBtn) {
-				smoothScroll(target.closest('a'));
-			} else if (event.target.classList.contains('close-btn')) {
-				event.preventDefault();
-				handlerMenu();
-			} else if (event.target.closest('a')) {
-				target = event.target.closest('a');
-
-				if (target.getAttribute('href') === '#') {
-					event.preventDefault();
-					return;
-				}
-				
-				smoothScroll(target);
+		if (event.target.closest('div')) {
+			if (event.target.closest('div').classList.contains('menu')) {
 				handlerMenu();
 			}
+		}
+	});
 
-			if (event.target.closest('div')) {
-				if (event.target.closest('div').classList.contains('menu')) {
-					handlerMenu();
-				}
-			}
-		});
+};
 
-	};
-
-	export default toggleMenu;
+export default toggleMenu;
