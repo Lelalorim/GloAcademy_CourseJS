@@ -1,5 +1,10 @@
 /* eslint-disable no-useless-escape */
+import maskPhone from './maskPhone';
+
 const validateInputs = () => {
+
+	maskPhone('.form-phone');
+	
 	const phoneNumber = /номер телефона/gi,
 		mailInput = /e-mail/gi,
 		nameInput = /имя/gi;

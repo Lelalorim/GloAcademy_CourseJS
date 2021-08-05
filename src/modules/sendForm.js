@@ -3,6 +3,9 @@ const sendForm = () => {
     loadMessage = 'Загрузка...',
     successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
 
+  const emailInputs = document.querySelectorAll('.form-email');
+  for(const emailInput of emailInputs) emailInput.required = true;
+
   const statusMessage = document.createElement('div');
   statusMessage.style.cssText = `
   font-size: 2rem;
@@ -10,9 +13,12 @@ const sendForm = () => {
   `;
 
   document.addEventListener('submit', event => {
-    const target = event.target;
+
+    const target = event.target;    
+    
     event.preventDefault();
     target.appendChild(statusMessage);
+
     statusMessage.textContent = loadMessage;
     const formData = new FormData(target);
     const body = {};
@@ -21,6 +27,10 @@ const sendForm = () => {
       body[key] = val;
     });
     target.reset();
+    const formElements = [...target.elements];
+    formElements.forEach( item => {
+        item.classList.remove('success');
+    })
 
     const postData = body => {
       return fetch('./server.php', {
@@ -41,7 +51,10 @@ const sendForm = () => {
       .catch(error => {
         statusMessage.textContent = errorMessage;
         console.error(error);
-      });
+      })
+      .finally(()=>{
+        setTimeout(()=> statusMessage.textContent = '', 4000);
+      })
   });
 
 };
