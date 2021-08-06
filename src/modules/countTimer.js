@@ -22,8 +22,7 @@ function countTimer(deadline) {
 		};
 	}
 
-	const idInterval = setInterval(() => {
-
+	const updateTime = () => {
 		const timer = (getTimeRemaining());
 
 		const addZero = digit => digit < 10 ? `0${digit}` : digit;
@@ -35,8 +34,11 @@ function countTimer(deadline) {
 		if (timer.timeRemaining < 0) {
 			clearInterval(idInterval);
 		}
+	};
 
-	}, 1000);
+	updateTime();
+
+	const idInterval = setInterval(updateTime, 1000);
 }
 
 export default countTimer;

@@ -29,4 +29,3 @@ sendForm();
 ourTeam();
 //validate input
 validateInputs();
-//validator

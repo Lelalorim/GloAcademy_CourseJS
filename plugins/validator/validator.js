@@ -138,7 +138,7 @@ const form2 = new Validator({
     name: /[А-Яа-яёЁ]+/,
     mess: /[А-Яа-яёЁ\s\.]+/,
     email: /^\w+@\w+\.\w{2,}$/,
-    phone: /^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/,
+    phone: /^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/,
   },
   method: {
     'form2-name': [
@@ -160,7 +160,7 @@ const form3 = new Validator({
   pattern: {
     name: /[А-Яа-яёЁ]/,
     email: /^\w+@\w+\.\w{2,}$/,
-    phone: /^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/,
+    phone: /^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/,
   },
   method: {
     'form3-name': [
