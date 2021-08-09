@@ -8,7 +8,9 @@ import tabs from './modules/tabs';
 import slider from './modules/slider';
 import ourTeam from './modules/ourTeam';
 import calc from './modules/calc';
+import maskPhone from './modules/maskPhone';
 import validateInputs from './modules/validateInputs';
+import validator from '../plugins/validator/validator.js';
 import sendForm from './modules/sendForm';
 
 // Timer
@@ -27,5 +29,8 @@ calc(100);
 sendForm();
 //OurTeam block
 ourTeam();
+
+maskPhone('.form-phone');
 //validate input
 validateInputs();
+validator();
