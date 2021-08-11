@@ -1,19 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background-color: #c5c5f1;
+    }
+  </style>
 </head>
 <body>
-    <img id="img" src="./mummy.png" alt="">
 
-<div class = "btn">
-    <button id = 'toggle' class="button">Start/pause</button>
-    <button id = 'reset' class="button">reset</button>
-</div>
-    <script src="main.js"></script>
+  <input type="text" value="1" name="CURR_FR_VAL" id="CURR_FR_VAL" placeholder="Enter amount" />
+
+  <select id="CURR_FR">
+    <option value="BTC" >BTC</option>
+    <option value="BYN" >BYN</option>
+    <option value="EUR" >EUR</option>
+    <option value="GBP" >GBP</option>
+    <option value="RUB" selected>RUB</option>
+    <option value="UAH" >UAH</option>
+    <option value="USD" >USD</option>
+  </select>
+
+  <span>to</span>
+
+  <select id="CURR_TO">
+    <option value="BTC" >BTC</option>
+    <option value="BYN" >BYN</option>
+    <option value="EUR" >EUR</option>
+    <option value="GBP" >GBP</option>
+    <option value="RUB" >RUB</option>
+    <option value="UAH" >UAH</option>
+    <option value="USD" selected>USD</option>
+  </select>
+
+  <button id="convertVal">Convert</button>
+
+  <input type="text" id="CURR_VAL" readonly placeholder="Press Convert button" style="background-color: #eee; font-weight: bold;" />
+
+
+  <script src="main.js"></script>
 </body>
 </html>

@@ -1,36 +1,25 @@
-/*jshint esversion: 8 */
-/* jshint node: true */
+const apiKey = 'f1fc37447d02f1f02148',
+  currentValuta = document.getElementById('CURR_FR'),
+  newValuta = document.getElementById('CURR_TO'),
+  amountValuta = document.getElementById('CURR_FR_VAL'),
+  result = document.getElementById('CURR_VAL'),
+  btnConvert = document.getElementById('convertVal');
+  
+btnConvert.addEventListener('click', ()=>{
+  const valToValString = currentValuta.options[currentValuta.selectedIndex].value +
+    '_' + newValuta.options[newValuta.selectedIndex].value;
 
-const img = document.getElementById('img'),
-  btnToggle = document.getElementById('toggle'),
-  btnReset = document.getElementById('reset');
+  fetch(`https://free.currconv.com/api/v7/convert?q=${valToValString}&compact=ultra&apiKey=${apiKey}`)
+    .then(response=>{
 
-let flyInterval;
-let count = 0;
-
-const flyAnimate = function() {
-  count += 5;
-  flyInterval = requestAnimationFrame(flyAnimate);
-  if (count < 1200) {
-    img.style.left = `${count}px`;
-  } else {
-    count = 0;
-    img.style.left = `${count}px`;
-  }
-};
-
-let animate = false;
-btnToggle.addEventListener('click', () => {
-  if(!animate) {
-    flyInterval = requestAnimationFrame(flyAnimate);
-    animate = true;
-  } else {
-    cancelAnimationFrame(flyInterval);
-    animate = false;
-  }
-});
-
-btnReset.addEventListener('click', () => {
-  img.style.left = 0;
-  count = 0;
+      if (response.status !== 200){
+        throw new Error('status network not 200');
+      }
+      return response.json();
+    })
+    .then(response => {
+      console.log(`Текущий курс: ${response[valToValString]} ${currentValuta.value} к 1 ${newValuta.value}`);
+      result.value = (response[valToValString] * amountValuta.value).toFixed(2);
+    })
+    .catch(error => console.error(error));
 });
