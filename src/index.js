@@ -12,6 +12,7 @@ import maskPhone from './modules/maskPhone';
 import validateInputs from './modules/validateInputs';
 import validator from '../plugins/validator/validator.js';
 import sendForm from './modules/sendForm';
+import SliderCarousel from './modules/sliderCarousel';
 
 // Timer
 countTimer('16 August 2021 07:00');
@@ -34,3 +35,30 @@ maskPhone('.form-phone');
 //validate input
 validateInputs();
 validator();
+
+//
+const carousel = new SliderCarousel({
+			main: '.companies-wrapper',
+			wrap: '.companies-hor',
+      parent: '.companies-hor',
+      // next: '#test-right',
+      // prev: '#test-left',
+      slidesToShow: 4,
+      infinity: true,
+
+      responsive: [{
+        breakpoint: 1024,
+        slideToShow: 3,
+      },
+      {
+        breakpoint: 768,
+        slideToShow: 2,
+      },
+      {
+        breakpoint: 576,
+        slideToShow: 1
+      }
+    ],
+		});
+
+		carousel.init();

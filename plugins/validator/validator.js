@@ -87,6 +87,7 @@ function validator() {
 
 		applyStyle() {
 			const style = document.createElement('style');
+			style.id = 'js-validator';
 			style.textContent = `
 				input.success {
 					border: 2px solid green !important;
@@ -100,8 +101,7 @@ function validator() {
 					color: red;
 				}
 			`;
-
-			document.head.appendChild(style);
+			if (!document.getElementById('js-validator'))	document.head.appendChild(style);
 		}
 
 		setPattern() {
